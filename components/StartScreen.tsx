@@ -28,7 +28,7 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart }) => {
           required
           maxLength={20}
         />
-        <p className="text-sm text-gray-500 mt-2 italic">Thánh địa tu tiên</p>
+        <p className="text-sm text-gray-500 mt-2 italic">Tu Tiên Tà Đạo</p>
         <button
           type="submit"
           className="mt-6 w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-3 px-4 rounded-lg hover:from-purple-500 hover:to-indigo-500 transform hover:scale-105 transition-all duration-300 shadow-lg shadow-purple-500/30 disabled:opacity-50 disabled:cursor-not-allowed"
