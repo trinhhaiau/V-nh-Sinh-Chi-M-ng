@@ -16,8 +16,8 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart }) => {
 
   return (
     <div className="flex flex-col items-center justify-center h-full animate-fade-in text-center">
-      <h2 className="text-3xl font-bold text-purple-300 text-glow mb-4">Nhập Tên</h2>
-      <p className="text-gray-400 mb-8">Hãy cho biết danh xưng của đạo hữu trên con đường trường sinh bất tử này.</p>
+      <h2 className="text-3xl font-bold text-purple-300 text-glow mb-4">Nhập tên</h2>
+      <p className="text-gray-400 mb-8">Hãy nhập tên cho nhân vật của bạn để bắt đầu hành trình.</p>
       <form onSubmit={handleSubmit} className="w-full max-w-sm">
         <input
           type="text"

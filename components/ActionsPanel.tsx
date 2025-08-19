@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface ActionsPanelProps {
@@ -21,7 +20,7 @@ const ActionsPanel: React.FC<ActionsPanelProps> = ({ onCultivate, onBreakthrough
           disabled={actionsDisabled}
           className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-3 px-4 rounded-lg hover:from-purple-500 hover:to-indigo-500 transform hover:scale-105 transition-all duration-300 shadow-lg shadow-purple-500/30 disabled:opacity-50 disabled:cursor-wait disabled:bg-gray-600 disabled:from-gray-600 disabled:shadow-none"
         >
-          {isLoading ? 'Đang Bận...' : 'Thiên Đình (Tăng EXP, MP)'}
+          {isLoading ? 'Đang Bận...' : 'Tĩnh Tọa (Tăng EXP)'}
         </button>
         <button
           onClick={onStartEncounter}
