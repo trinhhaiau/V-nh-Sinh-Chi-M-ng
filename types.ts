@@ -1,4 +1,12 @@
 
+export interface Skill {
+  id: string;
+  name: string;
+  type: 'Nội Tại' | 'Chủ Động'; // Passive | Active
+  description: string;
+  icon: string;
+}
+
 export interface SpiritualRoot {
   name: string;
   modifier: number;
@@ -28,6 +36,7 @@ export interface Player {
   spiritualRoot: SpiritualRoot;
   weapon: string;
   armor: string;
+  skills: Skill[];
 }
 
 export interface GameEvent {

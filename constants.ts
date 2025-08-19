@@ -1,5 +1,5 @@
 
-import { Realm, SpiritualRoot } from './types';
+import { Realm, SpiritualRoot, Skill } from './types';
 
 export const SPIRITUAL_ROOTS: SpiritualRoot[] = [
   { name: 'Phàm Căn', modifier: 0.8, description: 'Tư chất bình thường, tu luyện chậm chạp.' },
@@ -19,4 +19,28 @@ export const REALMS: Realm[] = [
   { id: 6, name: 'Nguyên Anh Kỳ', required: 100000, lifespanBonus: 200 },
   { id: 7, name: 'Hóa Thần Kỳ', required: 500000, lifespanBonus: 500 },
   { id: 8, name: 'Đại Thừa Kỳ', required: 50000000, lifespanBonus: 10000 },
+];
+
+export const INITIAL_SKILLS: Skill[] = [
+    {
+        id: 'basic_meditation',
+        name: 'Dưỡng Sinh Quyết',
+        type: 'Nội Tại',
+        description: 'Công pháp cơ bản giúp ổn định tâm thần, tăng nhẹ hiệu quả hấp thụ linh khí khi tĩnh tọa tu luyện.',
+        icon: 'bxs-heart',
+    },
+    {
+        id: 'body_tempering',
+        name: 'Thối Thể Thuật',
+        type: 'Nội Tại',
+        description: 'Phương pháp rèn luyện cơ thể, giúp tăng một chút sinh lực và phòng ngự cơ bản.',
+        icon: 'bxs-shield',
+    },
+    {
+        id: 'spirit_sense',
+        name: 'Linh Thức Sơ Giải',
+        type: 'Nội Tại',
+        description: 'Giúp tu sĩ có khả năng cảm nhận linh khí xung quanh, tăng một chút khí vận và khả năng gặp được cơ duyên.',
+        icon: 'bxs-binoculars',
+    }
 ];

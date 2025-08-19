@@ -4,15 +4,19 @@ import Header from './components/Header';
 import StartScreen from './components/StartScreen';
 import GameScreen from './components/GameScreen';
 import EncounterScreen from './components/EncounterScreen';
+import SkillsScreen from './components/SkillsScreen';
 import { Player, GameEvent, GeminiEncounterResponse, EncounterChoice } from './types';
-import { REALMS, SPIRITUAL_ROOTS } from './constants';
+import { REALMS, SPIRITUAL_ROOTS, INITIAL_SKILLS } from './constants';
 import { generateRandomEvent, generateEncounter } from './services/geminiService';
+
+type Tab = 'character' | 'skills' | 'inventory' | 'map' | 'more';
 
 const App: React.FC = () => {
   const [player, setPlayer] = useState<Player | null>(null);
   const [log, setLog] = useState<GameEvent[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [currentEncounter, setCurrentEncounter] = useState<GeminiEncounterResponse | null>(null);
+  const [activeTab, setActiveTab] = useState<Tab>('character');
 
   const addLog = useCallback((message: string, type: GameEvent['type'] = 'system') => {
     const timestamp = new Date();
@@ -39,6 +43,7 @@ const App: React.FC = () => {
       spiritualRoot: randomRoot,
       weapon: 'Trống',
       armor: 'Trống',
+      skills: INITIAL_SKILLS,
     };
     setPlayer(initialPlayer);
     addLog(`Chào mừng ${name} đến với thế giới tu tiên! Hành trình của bạn bắt đầu từ ${initialPlayer.realm.name}.`, 'system');
@@ -160,29 +165,59 @@ const App: React.FC = () => {
     setCurrentEncounter(null);
   }, [player, addLog]);
 
+  const renderContent = () => {
+    if (!player) {
+      return (
+        <div className="panel max-w-lg mx-auto">
+          <StartScreen onStart={handleStartGame} />
+        </div>
+      );
+    }
+
+    if (currentEncounter) {
+      return (
+        <div className="panel max-w-2xl mx-auto">
+          <EncounterScreen encounter={currentEncounter} onResolve={handleResolveEncounter} />
+        </div>
+      );
+    }
+
+    switch (activeTab) {
+      case 'character':
+        return (
+          <GameScreen
+            player={player}
+            log={log}
+            onCultivate={handleCultivate}
+            onBreakthrough={handleBreakthrough}
+            onStartEncounter={handleStartEncounter}
+            isLoading={isLoading}
+          />
+        );
+      case 'skills':
+         return <SkillsScreen player={player} />;
+      // Placeholder for other tabs
+      case 'inventory':
+      case 'map':
+      case 'more':
+        return (
+          <div className="panel text-center">
+            <h2 className="text-2xl text-purple-300">Tính năng đang phát triển</h2>
+            <p className="text-gray-400 mt-2">Nội dung cho mục này sẽ sớm được cập nhật.</p>
+          </div>
+        )
+      default:
+        return null;
+    }
+  };
+
+
   return (
     <div className="min-h-screen p-4 md:p-6 lg:p-8 selection:bg-purple-500/30">
       <div className="max-w-7xl mx-auto">
-        <Header />
+        <Header activeTab={activeTab} onTabChange={setActiveTab} />
         <main className="mt-8">
-          {!player ? (
-            <div className="panel max-w-lg mx-auto">
-              <StartScreen onStart={handleStartGame} />
-            </div>
-          ) : currentEncounter ? (
-            <div className="panel max-w-2xl mx-auto">
-             <EncounterScreen encounter={currentEncounter} onResolve={handleResolveEncounter} />
-            </div>
-          ) : (
-            <GameScreen
-              player={player}
-              log={log}
-              onCultivate={handleCultivate}
-              onBreakthrough={handleBreakthrough}
-              onStartEncounter={handleStartEncounter}
-              isLoading={isLoading}
-            />
-          )}
+          {renderContent()}
         </main>
       </div>
     </div>
