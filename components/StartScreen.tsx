@@ -16,8 +16,8 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart }) => {
 
   return (
     <div className="flex flex-col items-center justify-center h-full animate-fade-in text-center">
-      <h2 className="text-3xl font-bold text-purple-300 text-glow mb-4">Nhập tên</h2>
-      <p className="text-gray-400 mb-8">Hãy nhập tên cho nhân vật của bạn để bắt đầu hành trình.</p>
+      <h2 className="text-3xl font-bold text-purple-300 text-glow mb-4">Nhập Đạo</h2>
+      <p className="text-gray-400 mb-8">Vạn vật chúng sinh, con đường nào dành cho đạo hữu? Hãy lưu lại đạo hiệu của mình để bắt đầu hành trình.</p>
       <form onSubmit={handleSubmit} className="w-full max-w-sm">
         <input
           type="text"
@@ -34,7 +34,7 @@ const StartScreen: React.FC<StartScreenProps> = ({ onStart }) => {
           className="mt-6 w-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-bold py-3 px-4 rounded-lg hover:from-purple-500 hover:to-indigo-500 transform hover:scale-105 transition-all duration-300 shadow-lg shadow-purple-500/30 disabled:opacity-50 disabled:cursor-not-allowed"
           disabled={!name.trim()}
         >
-          Gia Nhập Thế Giới
+          Bắt Đầu Tu Luyện
         </button>
       </form>
     </div>
