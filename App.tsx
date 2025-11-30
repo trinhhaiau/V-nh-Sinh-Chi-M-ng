@@ -15,6 +15,7 @@ const App: React.FC = () => {
   const [player, setPlayer] = useState<Player | null>(null);
   const [log, setLog] = useState<GameEvent[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isBreakingThrough, setIsBreakingThrough] = useState<boolean>(false);
   const [currentEncounter, setCurrentEncounter] = useState<GeminiEncounterResponse | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>('character');
 
@@ -93,11 +94,13 @@ const App: React.FC = () => {
   const handleBreakthrough = useCallback(() => {
     if (!player || player.exp < player.realm.required) return;
     setIsLoading(true);
+    setIsBreakingThrough(true);
 
     const nextRealmIndex = player.realm.id + 1;
     if (nextRealmIndex >= REALMS.length) {
       addLog("Đạo hữu đã đạt đến đỉnh cao, vô địch thiên hạ!", 'breakthrough');
       setIsLoading(false);
+      setIsBreakingThrough(false);
       return;
     }
 
@@ -123,6 +126,7 @@ const App: React.FC = () => {
         addLog(`Đột phá thất bại! Cảnh giới bất ổn, kinh nghiệm tổn thất ${expLoss}.`, 'danger');
       }
       setIsLoading(false);
+      setIsBreakingThrough(false);
     }, 2000);
   }, [player, addLog]);
 
@@ -192,6 +196,7 @@ const App: React.FC = () => {
             onBreakthrough={handleBreakthrough}
             onStartEncounter={handleStartEncounter}
             isLoading={isLoading}
+            isBreakingThrough={isBreakingThrough}
           />
         );
       case 'skills':

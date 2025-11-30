@@ -12,9 +12,10 @@ interface GameScreenProps {
   onBreakthrough: () => void;
   onStartEncounter: () => void;
   isLoading: boolean;
+  isBreakingThrough?: boolean;
 }
 
-const GameScreen: React.FC<GameScreenProps> = ({ player, log, onCultivate, onBreakthrough, onStartEncounter, isLoading }) => {
+const GameScreen: React.FC<GameScreenProps> = ({ player, log, onCultivate, onBreakthrough, onStartEncounter, isLoading, isBreakingThrough = false }) => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 animate-fade-in">
       <div className="lg:col-span-5">
@@ -27,6 +28,7 @@ const GameScreen: React.FC<GameScreenProps> = ({ player, log, onCultivate, onBre
           onStartEncounter={onStartEncounter}
           isLoading={isLoading}
           canBreakthrough={player.exp >= player.realm.required}
+          isBreakingThrough={isBreakingThrough}
         />
         <LogPanel log={log} />
       </div>
